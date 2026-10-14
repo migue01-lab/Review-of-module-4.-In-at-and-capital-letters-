@@ -6,7 +6,7 @@
     <title>Quiz: English Rules for A1</title>
     <style>
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: Arial, sans-serif; 
             background-color: #f4f7f6; 
             margin: 0; 
             padding: 20px;
@@ -14,74 +14,55 @@
             flex-direction: column; 
             align-items: center; 
         }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        h1 { color: #2c3e50; font-size: 2.5em; margin-bottom: 5px; }
-        .subtitle { color: #7f8c8d; font-size: 1.2em; margin-top: 0; }
-        
         .quiz-container {
             width: 100%;
             max-width: 800px;
             background: white;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        
+        .header { text-align: center; margin-bottom: 30px; }
+        h1 { color: #2c3e50; }
         .question-block {
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #ecf0f1;
+            border-bottom: 1px solid #ecf0f1;
         }
-        .question-block:last-child {
-            border-bottom: none;
-        }
-        
         .question-text {
-            font-size: 1.4em;
+            font-size: 1.3em;
             color: #34495e;
             font-weight: bold;
             margin-bottom: 15px;
         }
-        
         .options {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        
         button {
-            padding: 12px 20px;
+            padding: 15px;
             font-size: 1.1em;
             text-align: left;
             background-color: #f8f9fa;
             border: 2px solid #bdc3c7;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
         }
+        button:hover { background-color: #e2e6ea; }
+        button:disabled { cursor: default; }
         
-        button:hover {
-            background-color: #e2e6ea;
-        }
+        /* Colores para respuestas */
+        .correct { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; }
+        .incorrect { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; }
         
-        button:disabled {
-            cursor: not-allowed;
-            opacity: 0.8;
-        }
-
-        .correct-btn { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; }
-        .wrong-btn { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; }
-
         .explanation {
-            display: none;
+            display: none; /* Esto oculta la explicación al principio */
             margin-top: 15px;
             padding: 15px;
-            border-radius: 8px;
             background-color: #e8f4f8;
             border-left: 5px solid #3498db;
+            border-radius: 5px;
             font-size: 1.1em;
             color: #2c3e50;
         }
@@ -89,16 +70,168 @@
 </head>
 <body>
 
-    <div class="header">
-        <h1>English Grammar Quiz</h1>
-        <p class="subtitle">Capital Letters & Prepositions (In / At / To / For)</p>
-    </div>
-
     <div class="quiz-container">
+        <div class="header">
+            <h1>English Grammar Quiz</h1>
+            <p>Capital Letters & Prepositions (In / At / To / For)</p>
+        </div>
 
-        <!-- Question 1 -->
+        <!-- Pregunta 1 -->
         <div class="question-block">
             <div class="question-text">1. I really like ________.</div>
-            <div class="options">
-                <button onclick="checkAnswer(this, 'q1', false)">A) Geography</button>
-                <button onclick="checkAnswer(this, 'q1', true)">B) geography
+            <div class="options" id="opts1">
+                <button onclick="checkAnswer(1, this, false)">A) Geography</button>
+                <button onclick="checkAnswer(1, this, true)">B) geography</button>
+            </div>
+            <div id="exp1" class="explanation">
+                <strong>Respuesta Correcta: B (geography).</strong><br>
+                Las materias generales o áreas de estudio son sustantivos comunes y siempre van en minúscula.
+            </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="question-block">
+            <div class="question-text">2. Tomorrow, I have a big test in ________.</div>
+            <div class="options" id="opts2">
+                <button onclick="checkAnswer(2, this, true)">A) History 101</button>
+                <button onclick="checkAnswer(2, this, false)">B) history 101</button>
+            </div>
+            <div id="exp2" class="explanation">
+                <strong>Respuesta Correcta: A (History 101).</strong><br>
+                Cuando incluyes un número o el nombre oficial de un curso, es un Proper Noun y lleva mayúscula.
+            </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="question-block">
+            <div class="question-text">3. Please take this document to the ________.</div>
+            <div class="options" id="opts3">
+                <button onclick="checkAnswer(3, this, false)">A) tv production department</button>
+                <button onclick="checkAnswer(3, this, true)">B) TV Production Department</button>
+            </div>
+            <div id="exp3" class="explanation">
+                <strong>Respuesta Correcta: B (TV Production Department).</strong><br>
+                Es el nombre oficial de un departamento, por lo tanto, todas sus palabras principales llevan mayúscula.
+            </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="question-block">
+            <div class="question-text">4. My brother works in ________.</div>
+            <div class="options" id="opts4">
+                <button onclick="checkAnswer(4, this, true)">A) TV production</button>
+                <button onclick="checkAnswer(4, this, false)">B) TV Production</button>
+                <button onclick="checkAnswer(4, this, false)">C) tv production</button>
+            </div>
+            <div id="exp4" class="explanation">
+                <strong>Respuesta Correcta: A (TV production).</strong><br>
+                "TV" siempre va en mayúscula porque es abreviación. "production" va en minúscula porque habla de la profesión en general.
+            </div>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="question-block">
+            <div class="question-text">5. I want to learn ________.</div>
+            <div class="options" id="opts5">
+                <button onclick="checkAnswer(5, this, true)">A) English</button>
+                <button onclick="checkAnswer(5, this, false)">B) english</button>
+            </div>
+            <div id="exp5" class="explanation">
+                <strong>Respuesta Correcta: A (English).</strong><br>
+                Los idiomas y nacionalidades siempre van con mayúscula inicial.
+            </div>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="question-block">
+            <div class="question-text">6. I study English ________ the CVA.</div>
+            <div class="options" id="opts6">
+                <button onclick="checkAnswer(6, this, false)">A) in</button>
+                <button onclick="checkAnswer(6, this, true)">B) at</button>
+            </div>
+            <div id="exp6" class="explanation">
+                <strong>Respuesta Correcta: B (at).</strong><br>
+                Usamos "at" para hablar de instituciones y lugares de estudio de manera general.
+            </div>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="question-block">
+            <div class="question-text">7. It's raining very hard! Let's wait ________ the CVA building.</div>
+            <div class="options" id="opts7">
+                <button onclick="checkAnswer(7, this, true)">A) in</button>
+                <button onclick="checkAnswer(7, this, false)">B) at</button>
+            </div>
+            <div id="exp7" class="explanation">
+                <strong>Respuesta Correcta: A (in).</strong><br>
+                Usamos "in" cuando queremos enfatizar que estamos físicamente adentro de un edificio.
+            </div>
+        </div>
+
+        <!-- Pregunta 8 -->
+        <div class="question-block">
+            <div class="question-text">8. She is a teacher ________ the university.</div>
+            <div class="options" id="opts8">
+                <button onclick="checkAnswer(8, this, true)">A) at</button>
+                <button onclick="checkAnswer(8, this, false)">B) in</button>
+            </div>
+            <div id="exp8" class="explanation">
+                <strong>Respuesta Correcta: A (at).</strong><br>
+                Para ubicaciones generales e instituciones donde se estudia o trabaja, "at" es lo correcto.
+            </div>
+        </div>
+
+        <!-- Pregunta 9 -->
+        <div class="question-block">
+            <div class="question-text">9. Hurry up! We are late ________ work!</div>
+            <div class="options" id="opts9">
+                <button onclick="checkAnswer(9, this, false)">A) to</button>
+                <button onclick="checkAnswer(9, this, true)">B) for</button>
+            </div>
+            <div id="exp9" class="explanation">
+                <strong>Respuesta Correcta: B (for).</strong><br>
+                ¡Nunca decimos "late to"! Siempre usamos "late FOR".
+            </div>
+        </div>
+
+        <!-- Pregunta 10 -->
+        <div class="question-block">
+            <div class="question-text">10. Every morning, I go ________ the university at 8:00 AM.</div>
+            <div class="options" id="opts10">
+                <button onclick="checkAnswer(10, this, true)">A) to</button>
+                <button onclick="checkAnswer(10, this, false)">B) for</button>
+            </div>
+            <div id="exp10" class="explanation">
+                <strong>Respuesta Correcta: A (to).</strong><br>
+                Usamos "to" para indicar movimiento o dirección hacia un lugar.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function checkAnswer(qNumber, btnClicked, isCorrect) {
+            // Obtener el div que contiene los botones de esa pregunta
+            var optionsDiv = document.getElementById('opts' + qNumber);
+            var buttons = optionsDiv.getElementsByTagName('button');
+            
+            // Desactivar todos los botones de esa pregunta
+            for(var i = 0; i < buttons.length; i++) {
+                buttons[i].disabled = true;
+                // Si el botón es la respuesta correcta (tiene true en el onclick), pintarlo verde
+                if(buttons[i].getAttribute('onclick').includes('true')) {
+                    buttons[i].classList.add('correct');
+                }
+            }
+            
+            // Si el estudiante hizo clic en el incorrecto, pintarlo rojo
+            if(!isCorrect) {
+                btnClicked.classList.add('incorrect');
+            }
+            
+            // Mostrar la explicación
+            document.getElementById('exp' + qNumber).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
